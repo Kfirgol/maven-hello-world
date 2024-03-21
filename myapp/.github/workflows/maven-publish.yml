@@ -1,0 +1,29 @@
+# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
+# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+
+# TODO:
+# a. Increase jar version automatically - patch (1.0.0 -> 1.0.1): change pom(?)
+# b. compile code: mvn package(?)/compile
+# c. package into artifact: mvn package
+# d. create artifact item for the build: ?
+# e. create docker image:
+#     1. create dockerfile: search for Maven dockerfile
+#     2. DO NOT run as root
+#     3. maybe use multistage docker
+# f. push docker image to Docker Hub: change from GitHub
+# g. Download and run docker image (huh?)
+
+# for using other runners: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+
+name: maven-hello-world
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+    version:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v4
+        - name: Set up JDK 11 for Shared Runner
+          uses: actions/setup-java@v4
+        - name: update version with Maven
+          run: mvn --batch-mode release:update-versions
