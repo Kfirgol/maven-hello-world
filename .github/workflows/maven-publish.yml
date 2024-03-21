@@ -1,5 +1,4 @@
 name: maven-hello-world
-run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 
 jobs:
@@ -15,7 +14,11 @@ jobs:
             cache: maven
           
         - name: update version with Maven
-          run: mvn --batch-mode release:update-versions
+          run: |
+            ls -la
+            cd myapp
+            mvn -B release:update-versions --file pom.xml
+           
          
         - name: Package
           run: mvn -B package --file pom.xml
