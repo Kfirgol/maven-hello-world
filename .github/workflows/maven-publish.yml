@@ -14,11 +14,8 @@ jobs:
             cache: maven
           
         - name: update version with Maven
-          run: |
-            ls -la
-            # cd myapp
-            mvn -B release:update-versions --file pom.xml
+          run: mvn -B release:update-versions --file ./myapp/pom.xml
            
          
         - name: Package
-          run: mvn -B package --file pom.xml
+          run: mvn -B package --file ./myapp/pom.xml
