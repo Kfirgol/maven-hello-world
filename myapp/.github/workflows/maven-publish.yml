@@ -15,9 +15,9 @@ jobs:
           
         - name: update version with Maven
           run: |
-           ls -la
-           cd myapp
-           mvn -B release:update-versions --file pom.xml
+            ls -la
+            cd myapp
+            mvn -B release:update-versions --file pom.xml
            
          
         - name: Package
