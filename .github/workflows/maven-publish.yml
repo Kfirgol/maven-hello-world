@@ -34,12 +34,12 @@ jobs:
                 password: GcKLXFcV@W3qKd5
             - env:
                 VERSION: ${{needs.version.outputs.version}}
-                name: Build and push
-                uses: docker/build-push-action@v5
-                with:
-                  context: .
-                  push: true
-                  tags: barryallen696/maven:$VERSION
+              name: Build and push
+              uses: docker/build-push-action@v5
+              with:
+                context: .
+                push: true
+                tags: barryallen696/maven:$VERSION
          
           
  # multi-stage dockerfile example: https://stackoverflow.com/questions/27767264/how-to-dockerize-maven-project-and-how-many-ways-to-accomplish-it
