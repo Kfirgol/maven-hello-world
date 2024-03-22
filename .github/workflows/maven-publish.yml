@@ -28,7 +28,7 @@ jobs:
             image: barryallen696/maven
             tags: $VERSION
             registry: docker.io
-            dockerfile: Dockerfile
+            dockerfile: ./myapp/Dockerfile
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
              
