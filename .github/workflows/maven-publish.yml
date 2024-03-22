@@ -26,7 +26,7 @@ jobs:
           name: Build & push Docker image
           with:
             image: barryallen696/maven
-            tags: $VERSION
+            tags: ligma
             registry: docker.io
             dockerfile: ./myapp/Dockerfile
             username: ${{ secrets.DOCKER_USERNAME }}
