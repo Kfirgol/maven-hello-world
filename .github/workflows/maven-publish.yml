@@ -4,19 +4,22 @@ on: [push]
 jobs:
     build-and-push:
         runs-on: ubuntu-latest
-        outputs:
-            output1: ${{steps.Version.outputs.version}}
         steps:
+        
         - uses: actions/checkout@v4
+          name: Checkout
+        
         - name: Set up JDK 17
           uses: actions/setup-java@v4
           with:
             java-version: '17'
             distribution: 'temurin'
             cache: maven
+ 
         - name: update version with Maven
           run: mvn -B release:update-versions --file ./myapp/pom.xml
-        - name: Version
+      
+        - name: Get Version
           id: get-version
           run: |
             VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
