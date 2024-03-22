@@ -17,16 +17,19 @@ jobs:
         - name: update version with Maven
           run: mvn -B release:update-versions --file ./myapp/pom.xml
         - name: Version
+          id: get-version
           run: |
             VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             echo $VERSION
-            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "VERSION=$VERSION" >> "$GITHUB_OUTPUT"
 
         - uses: mr-smithers-excellent/docker-build-push@v6
+          env:
+            VERSION: $ {{steps.get-version.outputs.VERSION}}
           name: Build & push Docker image
           with:
             image: barryallen696/maven
-            tags: ligma
+            tags: $VERSION
             registry: docker.io
             dockerfile: ./myapp/Dockerfile
             username: ${{ secrets.DOCKER_USERNAME }}
