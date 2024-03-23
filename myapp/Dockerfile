@@ -11,6 +11,6 @@ RUN mvn -f /usr/src/myapp/pom.xml clean package
 # FROM java:8
 FROM openjdk:8
 
-COPY --from=builder /usr/src/myapp/target/myapp-1.0.1-SNAPSHOT.jar /usr/app/myapp-1.0.1-SNAPSHOT.jar
+COPY --from=builder /usr/src/myapp/target/myapp-$VERSION.jar /usr/app/myapp-$VERSION.jar
 
-ENTRYPOINT ["java", "-cp", "/usr/app/myapp-1.0.1-SNAPSHOT.jar", "com.myapp.App"]
+ENTRYPOINT ["java", "-cp", "/usr/app/myapp-$VERSION.jar", "com.myapp.App"]
