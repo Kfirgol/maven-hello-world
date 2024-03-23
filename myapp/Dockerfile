@@ -1,10 +1,10 @@
 FROM maven:3.5-jdk-8-alpine as builder
 
-WORKDIR ./myapp
+# WORKDIR ./myapp
 RUN ls -la
 RUN pwd
-COPY ./src/ /usr/src/myapp/src
-COPY ./pom.xml /usr/src/myapp
+COPY src /usr/src/myapp/src
+COPY pom.xml /usr/src/myapp
 
 RUN mvn -f /usr/src/myapp/pom.xml clean package
 
