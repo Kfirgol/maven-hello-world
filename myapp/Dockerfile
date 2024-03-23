@@ -13,6 +13,6 @@ FROM openjdk:8
 ARG VERSION
 ARG VERSION ${VERSION}
 
-COPY --from=builder /usr/src/myapp/target/myapp-1.0.3-SNAPSHOT.jar /usr/app/myapp-1.0.3-SNAPSHOT.jar
+COPY --from=builder /usr/src/myapp/target/myapp-$VERSION.jar /usr/app/myapp-$VERSION.jar
 
-ENTRYPOINT ["java", "-cp", "/usr/app/myapp-1.0.3-SNAPSHOT.jar", "com.myapp.App"]
+ENTRYPOINT ["java", "-cp", "/usr/app/myapp-$VERSION.jar", "com.myapp.App"]
