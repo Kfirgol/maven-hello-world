@@ -22,7 +22,7 @@ jobs:
         - name: Get Version
           id: get-version
           run: |
-            VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+            VERSION=$(mvn help:evaluate -f ./myapp/pom.xml -Dexpression=project.version -q -DforceStdout)
             echo $VERSION
             echo "version=$VERSION" >> $GITHUB_OUTPUT
 
@@ -44,7 +44,7 @@ jobs:
             build-args: |
               VERSION=${{steps.get-version.outputs.version}}
             push: true
-            tags: barryallen696/maven:1.0.3
+            tags: barryallen696/maven:${{steps.get-version.outputs.version}}
             # ${{steps.get-version.outputs.version}}
           
 #        - uses: mr-smithers-excellent/docker-build-push@v6
