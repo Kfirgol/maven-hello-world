@@ -44,7 +44,8 @@ jobs:
             build-args: |
               VERSION=${{steps.get-version.outputs.version}}
             push: true
-            tags: barryallen696/maven:${{steps.get-version.outputs.version}}
+            tags: barryallen696/maven:1.0.3
+            # ${{steps.get-version.outputs.version}}
           
 #        - uses: mr-smithers-excellent/docker-build-push@v6
  #         env:
