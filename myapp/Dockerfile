@@ -1,8 +1,7 @@
 FROM maven:3.5-jdk-8-alpine as builder
 
 # WORKDIR ./myapp
-RUN ls -la
-RUN pwd
+RUN whoami
 COPY src /usr/src/myapp/src
 COPY pom.xml /usr/src/myapp
 

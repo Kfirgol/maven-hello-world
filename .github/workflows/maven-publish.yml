@@ -41,9 +41,9 @@ jobs:
             VERSION: ${{steps.get-version.outputs.VERSION}}
           with:
             context: ./myapp
-            build-args: VERSION=$VERSION
+            build-args: VERSION=${{VERSION}}
             push: true
-            tags: barryallen696/maven:$VERSION
+            tags: barryallen696/maven:${{VERSION}}
           
 #        - uses: mr-smithers-excellent/docker-build-push@v6
  #         env:
