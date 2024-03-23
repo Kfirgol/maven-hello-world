@@ -38,10 +38,10 @@ jobs:
         - name: Build and push
           uses: docker/build-push-action@v5
           #env:
-            #TAG: ${{steps.get-version.outputs.version}}
+            #VERSION: ${{steps.get-version.outputs.version}}
           with:
             context: ./myapp
-            build-args: TAG=${{steps.get-version.outputs.version}}
+            build-args: VERSION=${{steps.get-version.outputs.version}}
             push: true
             tags: barryallen696/maven:${{steps.get-version.outputs.version}}
           
