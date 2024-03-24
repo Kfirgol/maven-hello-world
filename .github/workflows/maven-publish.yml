@@ -1,14 +1,15 @@
-name: maven-hello-world
+name: Maven CI
 on: [push]
 
 jobs:
-    build-and-push:
+    Build and Push:
         runs-on: ubuntu-latest
         steps:
         
         - uses: actions/checkout@v4
           name: Checkout
         
+        # read about setup-java action and its with parameters (specifically cache and distri)
         - name: Set up JDK 17
           uses: actions/setup-java@v4
           with:
@@ -22,8 +23,7 @@ jobs:
         - name: Get Version
           id: get-version
           run: |
-            VERSION=$(mvn help:evaluate -f ./myapp/pom.xml -Dexpression=project.version -q -DforceStdout)
-            echo $VERSION
+            VERSION=$(mvn help:evaluate -f ./myapp/pom.xml -Dexpression=project.version -q -DforceStdout) # understand this command
             echo "version=$VERSION" >> $GITHUB_OUTPUT
 
         - name: Login to Docker Hub
@@ -31,35 +31,16 @@ jobs:
           with:
             username: ${{ secrets.DOCKER_USERNAME }}
             password: ${{ secrets.DOCKER_PASSWORD }}
-            
+          
+          # check if this stage is neccesary 
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v3
             
         - name: Build and push
-          uses: docker/build-push-action@v5
-          #env:
-            #VERSION: ${{steps.get-version.outputs.version}}
+          uses: docker/build-push-action@v5}
           with:
             context: ./myapp
             build-args: |
               VERSION=${{steps.get-version.outputs.version}}
             push: true
             tags: barryallen696/maven:${{steps.get-version.outputs.version}}
-            # ${{steps.get-version.outputs.version}}
-          
-#        - uses: mr-smithers-excellent/docker-build-push@v6
- #         env:
-  #          VERSION: ${{steps.get-version.outputs.VERSION}}
-   #       name: Build & push Docker image
-    #      with:
-     #       image: barryallen696/maven
-      #      tags: $VERSION
-       #     registry: docker.io
-        #    dockerfile: ./myapp/Dockerfile
-         #   username: ${{ secrets.DOCKER_USERNAME }}
-          #  password: ${{ secrets.DOCKER_PASSWORD }}
-
-
- # multi-stage dockerfile example: https://stackoverflow.com/questions/27767264/how-to-dockerize-maven-project-and-how-many-ways-to-accomplish-it
- # marketplace: https://github.com/marketplace
- # build and push action: https://github.com/marketplace/actions/build-and-push-docker-images#examples
