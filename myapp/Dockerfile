@@ -8,7 +8,8 @@ COPY pom.xml /usr/src/myapp
 RUN mvn -f /usr/src/myapp/pom.xml clean package 
 
 # FROM java:8
-FROM openjdk:8 # find better base image
+# find better base image
+FROM openjdk:8 
 
 ARG VERSION
 ARG VERSION ${VERSION}
