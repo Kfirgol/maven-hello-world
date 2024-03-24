@@ -1,0 +1,28 @@
+namespace: default
+name: myapp
+version: latest
+type: jar
+group: com.stackator
+deployment:
+
+    minReadySeconds: 5
+    replicaCount: 1
+    revisionHistoryLimit: 2
+service:
+    ingressClass: external-ingress
+    forceSslRedirect: true
+    prometheusPort: 9779
+    prometheusScrape: true
+    expose: true
+    additionalIngressAnnotations:
+        - key: monitor.stakater.com/enabled
+          value: true
+        - ports:
+            - name: http
+              port: 8080
+              protocol: TCP
+              targetPort: 8080
+image:
+    name: barryallen696/maven
+    tag: "latest"
+    pullPolicy: IfNotPresent
