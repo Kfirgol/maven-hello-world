@@ -19,4 +19,5 @@ ARG VERSION ${VERSION}
 COPY --from=builder /usr/src/myapp/target/myapp-$VERSION.jar /usr/app/myapp-$VERSION.jar 
 
 # figure out if this needs to be com.myapp.app.App
-ENTRYPOINT ["java", "-cp", "/usr/app/myapp-$VERSION.jar", "com.myapp.App"] 
+# ENTRYPOINT ["java", "-cp", "/usr/app/myapp-$VERSION.jar", "com.myapp.App"] 
+ENTRYPOINT ["java", "-jar", "/usr/app/myapp-$VERSION.jar"] 
