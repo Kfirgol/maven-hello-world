@@ -2,18 +2,13 @@ namespace: default
 name: myapp
 version: latest
 type: jar
-#serviceAccount: serviceaccount-name 
 group: com.stackator
 deployment:
-# podAnnotations:
-# - key: myannotationkey
-#     value: myannotationvalue
+
     minReadySeconds: 5
     replicaCount: 1
     revisionHistoryLimit: 2
 service:
-    #ingressPath: /vis/
-    #rewriteTarget: /
     ingressClass: external-ingress
     forceSslRedirect: true
     prometheusPort: 9779
